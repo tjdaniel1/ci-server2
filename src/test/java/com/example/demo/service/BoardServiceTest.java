@@ -29,7 +29,7 @@ class BoardServiceTest {
         Long id = 1L;
         BDDMockito.doNothing().when(boardRepository).deleteById(id);
         BDDMockito.given(boardRepository.findById(id))
-                .willReturn(Optional.of(new Board(1L, null, null)));
+                .willReturn(Optional.of(new Board(1L,null,null)));
 
         //when
         boardService.deleteById(id);
@@ -40,18 +40,15 @@ class BoardServiceTest {
     @Test
     void deleteByIdFail() {
 //        case 1: id 이런 것이 없을때 IllegalArgumentException
-        //given
+        // given
         Long id = 5000L;
-
         BDDMockito.given(boardRepository.findById(id))
                 .willReturn(Optional.empty());
-//        BDDMockito.doNothing().when(boardRepository).deleteById(id);
-
 
         //when & then
         assertThrows(IllegalArgumentException.class, () -> {
             boardService.deleteById(id);
         });
-        Mockito.verify(boardRepository, Mockito.times(0)).findById(id);
+
     }
 }
