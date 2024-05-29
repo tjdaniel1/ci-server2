@@ -43,7 +43,7 @@ jobs:
         script: |
           docker pull ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_REPO}}
           docker rm -f ${{secrets.DOCKER_REPO}}
-          docker run --name ${{secrets.DOCKER_REPO}} -p 8080:8080 --network server -d ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_REPO}}
+          docker run --name ${{secrets.DOCKER_REPO}} -p 8080:8080 -e profiles=${{secrets.SQL_PROFILES}} -e username=${{secrets.SQL_USERNAME}} -e password=${{secrets.SQL_PASSWORD}} --network server -d ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_REPO}}
             
 
     
